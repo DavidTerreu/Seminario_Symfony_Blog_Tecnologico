@@ -8,7 +8,6 @@
             <h1>{{ post.title }}</h1>
             <p class="meta">
                 Publicado el {{ post.publishedAt|date('d/m/Y H:i') }}
-                por {{ post.author }}
             </p>
             <div class="content">
                 {{ post.content|nl2br }}

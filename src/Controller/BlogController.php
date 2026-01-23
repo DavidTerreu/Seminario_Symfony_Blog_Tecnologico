@@ -24,8 +24,14 @@ final class BlogController extends AbstractController
     }
 
     #[Route('/post/{slug}', name: 'app_post_show')]
-    public function show(Post $post): Response
+    public function show(string $slug, PostRepository $postRepository): Response
     {
+        $post = $postRepository->findOneBy(['slug' => $slug]);
+
+        if (!$post) {
+            throw $this->createNotFoundException('El post no existe');
+        }
+
         return $this->render('blog/show.html.twig', [
             'post' => $post,
         ]);
